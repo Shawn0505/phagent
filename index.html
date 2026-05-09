@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHAGENT | Autonomous Molecular Defense</title>
+    <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap)" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00D4AA;
+            --primary-dark: #00A88A;
+            --secondary: #1a3a4a;
+            --bg-dark: #0a1a20;
+            --bg-darker: #050d10;
+            --text-light: #ffffff;
+            --text-muted: #8ba5b5;
+            --gradient: linear-gradient(135deg, #00D4AA 0%, #00A88A 50%, #007A6A 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-darker);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 26, 32, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 212, 170, 0.1);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 3px;
+        }
+
+        .nav-logo span {
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--gradient);
+            color: var(--bg-dark);
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 6rem 5%;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(0, 212, 170, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 168, 138, 0.1) 0%, transparent 40%),
+                var(--bg-darker);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .phage-icon {
+            width: 180px;
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 170, 0.5));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: 8px;
+            margin-bottom: 0.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .hero-description strong {
+            color: var(--primary);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--bg-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 170, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 170, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            stroke: var(--primary);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Section styling */
+        section {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Crisis Section */
+        .crisis {
+            background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(0, 212, 170, 0.05);
+            border: 1px solid rgba(0, 212, 170, 0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 212, 170, 0.1);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stat-label strong {
+            color: var(--text-light);
+        }
+
+        /* Problem Section */
+        .problem {
+            background: var(--bg-dark);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: var(--bg-darker);
+            border: 1px solid rgba(255, 100, 100, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #ff6464, #ff3333);
+        }
+
+        .problem-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 100, 100, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: #ff6464;
+            font-size: 1.5rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .problem-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Solution Section */
+        .solution {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+        }
+
+        .solution-visual {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mechanism-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .mechanism-step {
+            background: rgba(0, 212, 170, 0.03);
+            border: 1px solid rgba(0, 212, 170, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .mechanism-step:hover {
+            border-color: var(--primary);
+            background: rgba(0, 212, 170, 0.08);
+        }
+
+        .step-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .mechanism-step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .mechanism-step p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .key-innovation {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(0, 168, 138, 0.05) 100%);
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .key-innovation h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .key-innovation p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Advantages Section */
+        .advantages {
+            background: var(--bg-darker);
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .advantage-card {
+            background: linear-gradient(135deg, rgba(0, 212, 170, 0.08) 0%, rgba(0, 212, 170, 0.02) 100%);
+            border: 1px solid rgba(0, 212, 170, 0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 170, 0.15);
+        }
+
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .advantage-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .advantage-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            background: var(--bg-dark);
+        }
+
+        .comparison-table {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 212, 170, 0.1);
+        }
+
+        .comparison-table th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+            background: rgba(0, 212, 170, 0.05);
+        }
+
+        .comparison-table th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+
+        .comparison-table th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        .comparison-table td {
+            color: var(--text-muted);
+        }
+
+        .comparison-table td:first-child {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(0, 212, 170, 0.03);
+        }
+
+        .check {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #ff6464;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(0, 212, 170, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 212, 170, 0.1);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(10, 26, 32, 0.98);
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .mechanism-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .advantage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 5rem 5%;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">PH<span>A</span>GENT</div>
+        <ul class="nav-links">
+            <li><a href="#crisis">The Crisis</a></li>
+            <li><a href="#problem">The Problem</a></li>
+            <li><a href="#solution">Our Solution</a></li>
+            <li><a href="#advantages">Advantages</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Contact Us</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <svg class="phage-icon" viewBox="0 0 100 160" fill="none" xmlns="[w3.org](http://www.w3.org/2000/svg)">
+                <!-- Phage head (icosahedron) -->
+                <polygon points="50,5 75,20 75,45 50,60 25,45 25,20" fill="url(#grad1)" stroke="#00D4AA" stroke-width="1.5"/>
+                <polygon points="50,5 75,20 50,35 25,20" fill="rgba(0,212,170,0.3)" stroke="#00D4AA" stroke-width="0.5"/>
+                
+                <!-- Neck/collar -->
+                <rect x="45" y="60" width="10" height="15" fill="#00A88A"/>
+                <rect x="42" y="75" width="16" height="5" fill="#00D4AA"/>
+                
+                <!-- Tail tube -->
+                <rect x="47" y="80" width="6" height="40" fill="url(#grad2)"/>
+                
+                <!-- Tail fibers -->
+                <line x1="47" y1="90" x2="20" y2="115" stroke="#00D4AA" stroke-width="2"/>
+                <line x1="53" y1="90" x2="80" y2="115" stroke="#00D4AA" stroke-width="2"/>
+                <line x1="47" y1="100" x2="15" y2="130" stroke="#00D4AA" stroke-width="2"/>
+                <line x1="53" y1="100" x2="85" y2="130" stroke="#00D4AA" stroke-width="2"/>
+                <line x1="47" y1="110" x2="10" y2="145" stroke="#00D4AA" stroke-width="2"/>
+                <line x1="53" y1="110" x2="90" y2="145" stroke="#00D4AA" stroke-width="2"/>
+                
+                <!-- Baseplate -->
+                <polygon points="40,120 60,120 65,125 50,130 35,125" fill="#00D4AA"/>
+                
+                <defs>
+                    <linearGradient id="grad1" x1="25" y1="5" x2="75" y2="60" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#00D4AA"/>
+                        <stop offset="100%" stop-color="#007A6A"/>
+                    </linearGradient>
+                    <linearGradient id="grad2" x1="47" y1="80" x2="53" y2="120" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#00A88A"/>
+                        <stop offset="100%" stop-color="#00D4AA"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h1>PHAGENT</h1>
+            <p class="hero-tagline">Autonomous Molecular Defense</p>
+            <p class="hero-description">
+                Engineered phage-derived nanoparticles that <strong>navigate</strong> to infection sites, 
+                <strong>dismantle</strong> biofilms, <strong>strip</strong> resistance genes, and 
+                <strong>eliminate</strong> pathogens â€” without harming beneficial bacteria or triggering resistance evolution.
+            </p>
+            <div class="hero-cta">
+                <a href="#solution" class="btn-primary">Explore the Science</a>
+                <a href="#contact" class="btn-secondary">Partner With Us</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>SCROLL</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Crisis Section -->
+    <section class="crisis" id="crisis">
+        <div class="section-header fade-in">
+            <p class="section-label">The Silent Pandemic</p>
+            <h2 class="section-title">Antibiotic Resistance is Accelerating</h2>
+            <p class="section-subtitle">We're running out of time â€” and options</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <div class="stat-number">1.27M</div>
+                <p class="stat-label">Deaths per year <strong>directly</strong> caused by AMR</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">5M+</div>
+                <p class="stat-label">Deaths per year with AMR as a <strong>contributing factor</strong></p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">10M</div>
+                <p class="stat-label">Projected annual deaths by <strong>2050</strong> â€” exceeding cancer</p>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-number">0</div>
+                <p class="stat-label">New antibiotic classes discovered since <strong>1987</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="section-header fade-in">
+            <p class="section-label">Why Current Approaches Fail</p>
+            <h2 class="section-title">The Biofilm Barrier</h2>
+            <p class="section-subtitle">80% of chronic bacterial infections exist as biofilms â€” and they're nearly untreatable</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card fade-in">
+                <div class="problem-icon">ðŸ›¡ï¸</div>
+                <h3>Antibiotics Can't Penetrate</h3>
+                <p>Biofilms reduce antibiotic penetration by 100-1000x. The drugs simply can't reach the bacteria they're designed to kill.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">ðŸ’¤</div>
+                <h3>Dormant Bacteria Survive</h3>
+                <p>Bacteria inside biofilms are metabolically dormant. Antibiotics need active cell processes to work â€” dormant cells simply wait them out.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">ðŸ”„</div>
+                <h3>Selection Pressure Creates Resistance</h3>
+                <p>Any therapy applying lethal selective pressure produces resistant survivors. We're accelerating the very problem we're trying to solve.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">ðŸŽ¯</div>
+                <h3>Phages Are Too Narrow</h3>
+                <p>Each phage targets only 3-5 bacterial strains. Resistance emerges in 48-72 hours. No scalable product is possible.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">âš ï¸</div>
+                <h3>Collateral Damage</h3>
+                <p>No existing system can autonomously distinguish pathogenic bacteria from beneficial gut microbiome inside the body.</p>
+            </div>
+            <div class="problem-card fade-in">
+                <div class="problem-icon">ðŸ“‹</div>
+                <h3>Regulatory Dead Ends</h3>
+                <p>Live replicating organisms face massive regulatory complexity. Zero phage therapy products have FDA approval despite 30+ clinical trials globally.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="section-header fade-in">
+            <p class="section-label">Our Breakthrough</p>
+            <h2 class="section-title">Autonomous Molecular Defense</h2>
+            <p class="section-subtitle">A multi-mechanism platform that outsmarts bacterial evolution</p>
+        </div>
+        <div class="solution-visual">
+            <div class="mechanism-steps">
+                <div class="mechanism-step fade-in">
+                    <p class="step-number">STEP 01</p>
+                    <h3>Navigate</h3>
+                    <p>Engineered outer membrane vesicles (OMVs) derived from phages autonomously locate bacterial infection sites using chemical gradients.</p>
+                </div>
+                <div class="mechanism-step fade-in">
+                    <p class="step-number">STEP 02</p>
+                    <h3>Sense & Verify</h3>
+                    <p>Multi-signal AND-gate activation: PHAGENT activates <strong>only</strong> when multiple infection-specific biomarkers are simultaneously present. No false positives.</p>
+                </div>
+                <div class="mechanism-step fade-in">
+                    <p class="step-number">STEP 03</p>
+                    <h3>Dismantle Biofilm</h3>
+                    <p>Enzymatic payload degrades the biofilm matrix, exposing dormant bacteria and restoring drug penetration.</p>
+                </div>
+                <div class="mechanism-step fade-in">
+                    <p class="step-number">STEP 04</p>
+                    <h3>Strip Resistance</h3>
+                    <p>CRISPR-based system targets and cleaves antibiotic resistance genes, re-sensitizing bacteria to existing antibiotics.</p>
+                </div>
+                <div class="mechanism-step fade-in">
+                    <p class="step-number">STEP 05</p>
+                    <h3>Eliminate</h3>
+                    <p>Antimicrobial peptide payload delivers the final blow to exposed pathogens with minimal resistance potential.</p>
+                </div>
+                <div class="mechanism-step fade-in">
+                    <p class="step-number">STEP 06</p>
+                    <h3>Preserve Microbiome</h3>
+                    <p>Precision targeting spares commensal bacteria. Your gut microbiome remains intact and healthy.</p>
+                </div>
+            </div>
+            <div class="key-innovation fade-in">
+                <h3>The PHAGENT Advantage</h3>
+                <p>Unlike antibiotics that create evolutionary pressure, or phages that bacteria quickly evade, PHAGENT's multi-mechanism approach attacks through parallel pathways. Evolving resistance to one mechanism doesn't protect against the others. We're not fighting evolution â€” we're outpacing it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="advantages" id="advantages">
+        <div class="section-header fade-in">
+            <p class="section-label">Platform Benefits</p>
+            <h2 class="section-title">Why PHAGENT Wins</h2>
+        </div>
+        <div class="advantage-grid">
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">ðŸŽ¯</div>
+                <h3>Precision Targeting</h3>
+                <p>AND-gate logic ensures activation only at true infection sites. Multiple simultaneous signals required â€” virtually eliminates off-target effects.</p>
+            </div>
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">ðŸ§¬</div>
+                <h3>Resistance-Proof Design</h3>
+                <p>Multi-mechanism payload means bacteria can't evolve resistance through single mutations. The evolutionary math doesn't work in their favor.</p>
+            </div>
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">ðŸŒ¿</div>
+                <h3>Microbiome Safe</h3>
+                <p>Unlike broad-spectrum antibiotics, PHAGENT preserves your beneficial gut bacteria while eliminating pathogens.</p>
+            </div>
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">ðŸ“¦</div>
+                <h3>Scalable Platform</h3>
+                <p>Non-replicating OMV platform allows standardized manufacturing. One product architecture, multiple therapeutic targets.</p>
+            </div>
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">âœ…</div>
+                <h3>Regulatory Clarity</h3>
+                <p>Non-replicating particles avoid the regulatory complexity of live phage therapy. Clear path to approval.</p>
+            </div>
+            <div class="advantage-card fade-in">
+                <div class="advantage-icon">ðŸ’Š</div>
+                <h3>Antibiotic Synergy</h3>
+                <p>CRISPR-based resistance gene stripping can restore efficacy of existing antibiotics â€” breathing new life into our current arsenal.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="section-header fade-in">
+            <p class="section-label">Competitive Landscape</p>
+            <h2 class="section-title">How We Compare</h2>
+        </div>
+        <div class="comparison-table fade-in">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Capability</th>
+                        <th>Antibiotics</th>
+                        <th>Phage Therapy</th>
+                        <th>PHAGENT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Penetrates Biofilm</td>
+                        <td class="cross">âœ— 100-1000x reduced</td>
+                        <td class="check">âœ“ Partial</td>
+                        <td class="check">âœ“ Active degradation</td>
+                    </tr>
+                    <tr>
+                        <td>Kills Dormant Bacteria</td>
+                        <td class="cross">âœ— Requires metabolism</td>
+                        <td class="cross">âœ— Requires metabolism</td>
+                        <td class="check">âœ“ Direct mechanism</td>
+                    </tr>
+                    <tr>
+                        <td>Resistance Evolution</td>
+                        <td class="cross">âœ— Rapid (days-weeks)</td>
+                        <td class="cross">âœ— 48-72 hours</td>
+                        <td class="check">âœ“ Multi-barrier</td>
+                    </tr>
+                    <tr>
+                        <td>Spectrum</td>
+                        <td class="check">âœ“ Broad</td>
+                        <td class="cross">âœ— 3-5 strains/phage</td>
+                        <td class="check">âœ“ Programmable</td>
+                    </tr>
+                    <tr>
+                        <td>Microbiome Safe</td>
+                        <td class="cross">âœ— Collateral damage</td>
+                        <td class="check">âœ“ Narrow targeting</td>
+                        <td class="check">âœ“ Precision logic</td>
+                    </tr>
+                    <tr>
+                        <td>Regulatory Path</td>
+                        <td class="check">âœ“ Established</td>
+                        <td class="cross">âœ— Complex (0 approvals)</td>
+                        <td class="check">âœ“ Clear (non-replicating)</td>
+                    </tr>
+                    <tr>
+                        <td>Scalable Manufacturing</td>
+                        <td class="check">âœ“ Yes</td>
+                        <td class="cross">âœ— Custom cocktails</td>
+                        <td class="check">âœ“ Platform model</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-content fade-in">
+            <h2>Join the Fight Against AMR</h2>
+            <p>We're seeking partners in pharma, biotech, and healthcare systems who recognize that the antibiotic era is ending â€” and want to help build what comes next.</p>
+            <div class="hero-cta">
+                <a href="mailto:contact@phagent.bio" class="btn-primary">Get in Touch</a>
+                <a href="#" class="btn-secondary">Download White Paper</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>PHAGENT</h3>
+                <p>Autonomous Molecular Defense. Pioneering the post-antibiotic era with intelligent, resistance-proof therapeutics.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">News</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Science</h4>
+                <ul>
+                    <li><a href="#">Technology</a></li>
+                    <li><a href="#">Publications</a></li>
+                    <li><a href="#">Pipeline</a></li>
+                    <li><a href="#">Partners</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="mailto:phagentinc@gmail.com">Email: phagentinc@gmail.com</a></li>
+                    <li><a href="[linkedin.com](https://www.linkedin.com/in/phagent-inc-711605409)" target="_blank">LinkedIn</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Press Kit</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Founders</h4>
+                <ul>
+                    <li>David Oladimeji</li>
+                    <li>Ehinomen Esekheilu</li>
+                    <li>Yash Shamdasani</li>
+                    <li>Mischa Sawchuk</li>
+                    <li>Moyo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 PHAGENT Therapeutics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(5, 13, 16, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 26, 32, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
